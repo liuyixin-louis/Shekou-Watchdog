@@ -58,9 +58,10 @@ class Service:
             log_info = f"[{index + 1}/{dates_cnt}] Checking and pushing date:{i}".center(46, '-')
             logger.info(log_info)
             ret = report.main(i)
-            push.push(ret, "Hi", account.wechat_push(index), account.email_push(index), account.sendkey(index),
+            if "10:00" in ret[1]:
+                push.push(ret, "Hi", account.wechat_push(index), account.email_push(index), account.sendkey(index),
                       self._all_date_userid[i][1:], account.email(index))
-            sleep(1)
+                sleep(1)
 
     @logger.catch
     def _gen(self):
